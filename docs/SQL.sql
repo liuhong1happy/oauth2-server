@@ -16,6 +16,7 @@ CREATE TABLE `oauth-server`.`user` (
 -- 开发者用户表
   CREATE TABLE `oauth-server`.`developer` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(255) NOT NULL,
   `username` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
   `is_active` INT NOT NULL,
