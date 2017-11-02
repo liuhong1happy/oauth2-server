@@ -1,7 +1,6 @@
 
 
 <!-- TOC -->
-# 目录
 
 - [Web接口设计](#web接口设计)
     - [1.1 用户登录](#11-用户登录)
@@ -18,11 +17,13 @@
     - [3.2 应用删除](#32-应用删除)
     - [3.3 应用修改](#33-应用修改)
     - [3.4 应用查询列表](#34-应用查询列表)
+    - [3.5 更新应用密钥](#35-更新应用密钥)
     - [4.1 认证服务登录](#41-认证服务登录)
     - [4.2 用户确认授权 - 获取授权码](#42-用户确认授权---获取授权码)
     - [4.3 开发者获取令牌 - 获取访问令牌](#43-开发者获取令牌---获取访问令牌)
     - [4.4 获取用户授权信息](#44-获取用户授权信息)
     - [4.5 刷新令牌](#45-刷新令牌)
+    - [5.1 文件上传](#51-文件上传)
 
 <!-- /TOC -->
 
@@ -234,6 +235,7 @@
 
 **Request Body**
 
+- type 更新类型，此处为 `BaseInfo`
 - app_name 应用名称
 - app_home 应用官网
 - app_icon 应用图标
@@ -275,6 +277,26 @@
         - app_secret 应用密钥 （自动生成，生成后可重新生成）
     - total 总数
 
+## 3.5 更新应用密钥
+
+`PUT` `／api/developer/application/:app_id`
+
+**Request Body**
+
+- type 更新类型，此处为 `AppSecret`
+- app_secret 原来的密钥
+
+**Response Body**
+
+- code 状态
+- msg 返回的消息
+- data 返回的数据
+    - app_id 应用id
+    - app_name 应用名称
+    - app_home 应用官网
+    - app_icon 应用图标
+    - app_key 应用key（自动生成，生成后固定）
+    - app_secret 应用密钥 （自动生成，生成后可重新生成）
 
 ## 4.1 认证服务登录
 
@@ -292,12 +314,14 @@
 
 ## 4.2 用户确认授权 - 获取授权码
 
-`POST` `／api/oauth2/authorize`
+`GET` `／api/oauth2/authorize`
 
 **Request Body**
 
+- response_type 授权类型
 - app_key 应用key
 - scope 获取用户信息的域
+- redirect_url 成功后的回调地址
 
 **Response Body**
 
@@ -308,13 +332,14 @@
 
 ## 4.3 开发者获取令牌 - 获取访问令牌
 
-`POST` `／api/oauth2/token`
+`GET` `／api/oauth2/token`
 
 **Request Body**
 
 - app_key 应用key
 - app_secret 应用密钥 （自动生成，生成后可重新生成）
 - code 授权码
+- redirect_url 成功后的回调地址
 
 **Response Body**
 
@@ -364,3 +389,22 @@
     - refresh_token 刷新令牌
     - expires_in 过期时间(s)
     - expires_date 过期日期(date)
+
+## 5.1 文件上传
+
+`POST` `／api/common/upload`
+
+**Request Body**
+
+- file 文件
+
+**Response Body**
+
+- code 状态
+- msg 返回的消息
+- data 返回的数据
+    - file_name 文件名称
+    - file_md5 文件md5
+    - file_size 文件大小
+    - img_width 图片宽度
+    - img_height 图片高度
