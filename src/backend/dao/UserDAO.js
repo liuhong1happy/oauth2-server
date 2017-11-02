@@ -1,7 +1,7 @@
 import Model from 'similar-server/dist/model';
 import ResultModel from '../models/ResultModel';
 import UserModel from '../models/UserModel';
-
+import FileModel from '../models/FileModel';
 class UserDAO {
     async save(data) {
         const user = new UserModel(data);
@@ -33,7 +33,8 @@ class UserDAO {
     async queryUserByOptions(options) {
         const result = new ResultModel();
         try{
-            const response = await UserModel.findOne(options).exec();
+            console.log(options.include);
+            let response = await UserModel.findOne(options);
             result.Data = response;
             result.Status = 'success';
             return result;

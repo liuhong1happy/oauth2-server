@@ -4,7 +4,7 @@ import UserAPIController from './controllers/UserAPIController';
 
 export default Router('/',[
     Route('home/:id', new HomeController()),
-    Route('/api/oauth', [
+    Route('api/oauth', [
         Route('user', new UserAPIController())
     ])
 ]);

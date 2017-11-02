@@ -15,15 +15,12 @@ const FileModel = global.sequelize.define('File', {
     createdAt: 'create_dt',
     updatedAt: 'update_dt',
     deletedAt: 'is_del',
+    getterMethods: {
+        url() {
+          return 'http://o9sa2vijj.bkt.clouddn.com/' + this.md5
+        }
+    },
   });
-  
-  FileModel.sync({
-    force: true
-  }).then(() => {
-
-  }).catch(err=> {
-    throw err
-  })
 
   export default FileModel;
   

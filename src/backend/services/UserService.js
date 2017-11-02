@@ -11,7 +11,7 @@ class UserService {
         return this.dao.save(data);
     }
     queryUserByOptions(options) {
-        return this.dao.queryUserByOptions(data);
+        return this.dao.queryUserByOptions(options);
     }
 }
 
