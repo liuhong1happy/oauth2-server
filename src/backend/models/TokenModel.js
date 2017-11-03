@@ -1,5 +1,5 @@
-const UserModel = global.sequelize.import('./UserModel');
-const ApplicationModel = global.sequelize.import('./ApplicationModel');
+import ApplicationModel from './ApplicationModel'
+import UserModel from './UserModel';
 
 const TokenModel = global.sequelize.define('Token', {
     id: { type: Sequelize.BIGINT(11), primaryKey: true, autoIncrement: true, comment: '主键' },
@@ -22,11 +22,11 @@ const TokenModel = global.sequelize.define('Token', {
     deletedAt: 'is_del',
   });
 
-  CodeModel.belongsTo(UserModel, {foreignKey: 'user_id', targetKey: 'id', as: 'User'})
-  UserModel.hasMany(CodeModel, {foreignKey: 'user_id', sourceKey: 'id', as: 'Codes'})
+  TokenModel.belongsTo(UserModel, {foreignKey: 'user_id', targetKey: 'id', as: 'User'})
+  UserModel.hasMany(TokenModel, {foreignKey: 'user_id', sourceKey: 'id', as: 'Tokens'})
   
-  CodeModel.belongsTo(ApplicationModel, {foreignKey: 'app_id', targetKey: 'id', as: 'Application'})
-  ApplicationModel.hasMany(CodeModel, {foreignKey: 'app_id', sourceKey: 'id', as: 'Codes'})
+  TokenModel.belongsTo(ApplicationModel, {foreignKey: 'app_id', targetKey: 'id', as: 'Application'})
+  ApplicationModel.hasMany(TokenModel, {foreignKey: 'app_id', sourceKey: 'id', as: 'Tokens'})
   
   export default TokenModel;
   

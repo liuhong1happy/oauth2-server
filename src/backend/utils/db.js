@@ -57,6 +57,10 @@ export default {
     },
     InitTable: async ()=> {
         const UserModel = require('../models/UserModel').default
+        const DeveloerModel = require('../models/DeveloperModel').default
+        const ApplicationModel = require('../models/ApplicationModel').default
+        const CodeModel = require('../models/CodeModel').default
+        const TokenModel = require('../models/TokenModel').default
         const FileModel = require('../models/FileModel').default
         try {
             await sequelize.sync({force: true})
@@ -67,6 +71,10 @@ export default {
     },
     InitData: async ()=> {
         const UserModel = require('../models/UserModel').default
+        const DeveloerModel = require('../models/DeveloperModel').default
+        const ApplicationModel = require('../models/ApplicationModel').default
+        const CodeModel = require('../models/CodeModel').default
+        const TokenModel = require('../models/TokenModel').default
         const FileModel = require('../models/FileModel').default
 
         await UserModel.create({
@@ -87,5 +95,38 @@ export default {
         },{
             include: [ { association: 'Avatar' } ]
         });
+
+        await DeveloerModel.create({
+            username: "liuhong1happy",
+            email: "liuhong1.happy@163.com",
+            password: '123456',
+            token: '123456',
+            is_active: true,
+            Avatar: {
+                name: '1.jpg',
+                md5: 'Fmo7XUWAhj-VzZeeqmOGCGpAmmnA',
+                size: 27496,
+                width: 411,
+                height: 411
+            }
+        },{
+            include: [ { association: 'Avatar' } ]
+        })
+
+        await ApplicationModel.create({
+            app_name: "今日头条",
+            app_key: '23087',
+            app_home: 'http://www.baidu.com',
+            developer_id: 1,
+            Icon: {
+                name: '1.jpg',
+                md5: 'Fmo7XUWAhj-VzZeeqmOGCGpAmmnA',
+                size: 27496,
+                width: 411,
+                height: 411
+            }
+        },{
+            include: [ { association: 'Icon' } ]
+        })
     }
 }

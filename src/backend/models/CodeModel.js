@@ -1,5 +1,5 @@
-const UserModel = global.sequelize.import('./UserModel');
-const ApplicationModel = global.sequelize.import('./ApplicationModel');
+import ApplicationModel from './ApplicationModel'
+import UserModel from './UserModel';
 
 const CodeModel = global.sequelize.define('Code', {
     id: { type: Sequelize.BIGINT(11), primaryKey: true, autoIncrement: true, comment: '主键' },
@@ -10,6 +10,7 @@ const CodeModel = global.sequelize.define('Code', {
     app_id: { type: Sequelize.BIGINT(11), allowNull: false, comment: '应用表外键'},
   }, {
     comment: "开发者表",
+    tableName: 'code',
     timestamps: true,
     underscored: true,
     paranoid: true,
