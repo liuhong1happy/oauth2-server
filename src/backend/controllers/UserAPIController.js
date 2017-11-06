@@ -10,17 +10,12 @@ class UserAPIController extends Controller {
     @RenderAPI()
     Login(req, res, next, params) {
         // 1. 参数校验
-        const result = new ResultModel();
         if(!req.body.email) {
-            result.Status = 'error';
-            result.Msg = '邮箱不能为空';
-            return result;
+            return new ResultModel(ResultModel.Error, '邮箱不能为空');
         }
 
         if(!req.body.password) {
-            result.Status = 'error';
-            result.Msg = '密码不能为空';
-            return result;
+            return new ResultModel(ResultModel.Error, '密码不能为空');
         }
         // 执行业务逻辑
         return services.login(req.body);
