@@ -42,7 +42,7 @@ const operatorsAliases = {
 
 export default {
     Connect: async ()=>{
-        const sequelize = new Sequelize('mysql://root:123@localhost:3306/oauth-db',{ operatorsAliases });
+        const sequelize = new Sequelize('mysql://root:12345678@localhost:3306/oauth-db',{ operatorsAliases });
         // 预链接
         try {
             await sequelize.authenticate();

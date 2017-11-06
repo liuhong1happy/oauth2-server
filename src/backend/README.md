@@ -1,19 +1,30 @@
-## Install PostgreSQL
+## 开发环境 
 
-#### Docker
+- 开发语言 nodejs
+- 数据库 mysql
+- web框架 similar-server
 
-```shell
-docker run --name some-postgres -p 127.0.0.1:5432:5432 -v /data/db/postgres:/var/lib/postgresql/data \
- -e POSTGRES_PASSWORD=123456 -e POSTGRES_USER=root -e POSTGRES_DB=admin \
- -d postgres
-```
+## 快速开始
 
-#### Others
+1. 安装mysql
+2. 安装nodejs
+3. 安装nodejs依赖包
 
-see [https://www.postgresql.org/download/](https://www.postgresql.org/download/)
+    cd src/backend
+    npm install
 
-## Start Server
+4. mysql中创建数据库
 
-```shell
-npm start
-```
+    oauth-db
+
+5. 快速初始化
+
+    npm run init
+
+6. 运行服务
+
+    npm start
+
+7. 开启测试
+
+    npm run test
