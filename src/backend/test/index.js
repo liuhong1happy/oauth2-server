@@ -13,13 +13,15 @@ beforeEach(function(done) {
 });
 
 describe('upload file', function() {
-    it('upload image file', function(done) {
+    it('upload image file success', function(done) {
         server
         .post('/api/common/upload')
         .attach('file', 'test/images/pic1.jpg')
         .expect(200, (err, res)=>{
             console.log(JSON.stringify(res.body));
-            done(err);
+            if(res.body.status !== "success") {
+                done(res.body)
+            } else done(err);
         })
     });
 });
@@ -34,6 +36,7 @@ describe('user api', function() {
             "password": "123456"
         }))
         .expect(200, (err, res)=>{
+            console.log(JSON.stringify(res.body));
             if(res.body.status !== "success") {
                 done(res.body)
             } else done(err);
@@ -48,6 +51,7 @@ describe('user api', function() {
             "password": "123456"
         }))
         .expect(200, (err, res)=>{
+            console.log(JSON.stringify(res.body));
             if(res.body.status !== "error") {
                 done(res.body)
             } else done(err);

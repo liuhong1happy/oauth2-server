@@ -5,6 +5,8 @@ class ResultModel extends Model {
         const { status, msg, data } = this;
         return { status, msg, data };
     }
+    static get Success() { return 'success' }
+    static get Error(){ return 'error' }
     set Status(status) {
         this.status = status;
     }

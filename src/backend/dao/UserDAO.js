@@ -9,10 +9,10 @@ class UserDAO {
         try{
             const response = await user.save();
             result.Data = response;
-            result.Status = 'success';
+            result.Status = ResultModel.Success;
         } catch(e) {
             result.Msg = e.message;
-            result.Status = 'error';
+            result.Status = ResultModel.Error;
         }
         return result;
     }
@@ -21,11 +21,11 @@ class UserDAO {
         try{
             const response = await UserModel.findById(id).exec();
             result.Data = response;
-            result.Status = 'success';
+            result.Status = ResultModel.Success;
             return result;
         } catch(e) {
             result.Msg = e.message;
-            result.Status = 'error';
+            result.Status = ResultModel.Error;
             return result;
         }
     }
@@ -37,16 +37,16 @@ class UserDAO {
             let response = await UserModel.findOne(options);
             
             if(response === null) {
-                result.Status = 'error';
+                result.Status = ResultModel.Error;
                 result.Msg = '用户名密码错误';
             } else {
-                result.Status = 'success';
+                result.Status = ResultModel.Success;
                 result.Data = response;
             }
             return result;
         } catch(e) {
             result.Msg = e.message;
-            result.Status = 'error';
+            result.Status = ResultModel.Error;
             return result;
         }
     }

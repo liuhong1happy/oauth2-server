@@ -10,8 +10,28 @@ class UserService {
     createUser(data) {
         return this.dao.save(data);
     }
-    queryUserByOptions(options) {
-        return this.dao.queryUserByOptions(options);
+    login(body) {
+        return this.dao.queryUserByOptions({
+            attributes: {
+                exclude: ['password', 'avatarFileId', 'is_del', 'avatar_file_id']
+            },
+            where: {
+                email: {
+                    '$eq': body.email || "",
+                },
+                password:{
+                    '$eq': body.password || ''
+                }
+            },
+            include: [
+                { 
+                    association: 'Avatar',
+                    attributes: {
+                        exclude: ['is_del', 'id', 'create_dt', 'update_dt']
+                    },
+                }
+            ]
+        })
     }
 }
 

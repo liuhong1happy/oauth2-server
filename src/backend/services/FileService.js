@@ -53,7 +53,7 @@ class FileService {
                                         // 删除原来的文件
                                         fs.unlinkSync(filePath);
                                         // 拷贝成功后，返回结果
-                                        result.Status = "sucess";
+                                        result.Status = "success";
                                         result.Data = copyFilePath;
                                     } else {
                                         result.Status = "error";

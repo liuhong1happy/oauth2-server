@@ -9,10 +9,10 @@ class UserDAO {
         try{
             const response = await fileModel.save();
             result.Data = response;
-            result.Status = 'success';
+            result.Status = ResultModel.Success;
         } catch(e) {
             result.Msg = e.message;
-            result.Status = 'error';
+            result.Status = ResultModel.Error;
         }
         return result;
     }
@@ -22,11 +22,11 @@ class UserDAO {
         try{
             const response = await FileModel.findById(id).exec();
             result.Data = response;
-            result.Status = 'success';
+            result.Status = ResultModel.Success;
             return result;
         } catch(e) {
             result.Msg = e.message;
-            result.Status = 'error';
+            result.Status = ResultModel.Error;
             return result;
         }
     }
