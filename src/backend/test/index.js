@@ -23,3 +23,34 @@ describe('upload file', function() {
         })
     });
 });
+
+describe('user api', function() {
+    it('user login success', function(done) {
+        server
+        .post('/api/oauth/user/login')
+        .type('application/json')
+        .send(JSON.stringify({
+            "email": "liuhong1.happy@163.com",
+            "password": "123456"
+        }))
+        .expect(200, (err, res)=>{
+            if(res.body.status !== "success") {
+                done(res.body)
+            } else done(err);
+        })
+    });
+    it('user login error', function(done) {
+        server
+        .post('/api/oauth/user/login')
+        .type('application/json')
+        .send(JSON.stringify({
+            "email": "12233",
+            "password": "123456"
+        }))
+        .expect(200, (err, res)=>{
+            if(res.body.status !== "error") {
+                done(res.body)
+            } else done(err);
+        })
+    });
+});

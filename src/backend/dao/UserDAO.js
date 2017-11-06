@@ -35,8 +35,14 @@ class UserDAO {
         try{
             console.log(options.include);
             let response = await UserModel.findOne(options);
-            result.Data = response;
-            result.Status = 'success';
+            
+            if(response === null) {
+                result.Status = 'error';
+                result.Msg = '用户名密码错误';
+            } else {
+                result.Status = 'success';
+                result.Data = response;
+            }
             return result;
         } catch(e) {
             result.Msg = e.message;
