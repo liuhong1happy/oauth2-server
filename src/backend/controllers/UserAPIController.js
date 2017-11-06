@@ -2,8 +2,6 @@ import Controller from 'similar-server/dist/controller';
 import { RenderAPI, Get } from 'similar-server/dist/view';
 import UserService from '../services/UserService';
 
-const Op = global.Sequelize.Op
-
 const services = new UserService();
 
 class UserAPIController extends Controller {
