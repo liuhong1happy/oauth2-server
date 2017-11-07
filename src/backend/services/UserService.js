@@ -11,27 +11,25 @@ class UserService {
         return this.dao.save(data);
     }
     login(body) {
-        return this.dao.queryUserByOptions({
-            attributes: {
-                exclude: ['password', 'avatarFileId', 'is_del', 'avatar_file_id']
-            },
-            where: {
-                email: {
-                    '$eq': body.email || "",
-                },
-                password:{
-                    '$eq': body.password || ''
-                }
-            },
-            include: [
-                { 
+        try{
+            const response = this.dao.findOne({
+                attributes: { exclude: ['password', 'avatarFileId', 'is_del', 'avatar_file_id'] },
+                where: { email: { '$eq': body.email }, password:{ '$eq': body.password}},
+                include: [{
                     association: 'Avatar',
-                    attributes: {
-                        exclude: ['is_del', 'id', 'create_dt', 'update_dt']
-                    },
-                }
-            ]
-        })
+                    attributes: {exclude: ['is_del', 'id', 'create_dt', 'update_dt']},
+                }]
+            })
+            
+            if(response === null) {
+                return new ResultModel(ResultModel.Error, '用户名密码错误')
+            } else {
+                return new ResultModel(ResultModel.Error, '', response)
+            }
+            return result;
+        } catch(e) {
+            return new ResultModel(ResultModel.Error, e.message)
+        }
     }
 }
 

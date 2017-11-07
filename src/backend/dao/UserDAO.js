@@ -30,25 +30,9 @@ class UserDAO {
         }
     }
 
-    async queryUserByOptions(options) {
-        const result = new ResultModel();
-        try{
-            console.log(options.include);
-            let response = await UserModel.findOne(options);
-            
-            if(response === null) {
-                result.Status = ResultModel.Error;
-                result.Msg = '用户名密码错误';
-            } else {
-                result.Status = ResultModel.Success;
-                result.Data = response;
-            }
-            return result;
-        } catch(e) {
-            result.Msg = e.message;
-            result.Status = ResultModel.Error;
-            return result;
-        }
+    async findOne(options) {
+        let response = await UserModel.findOne(options);
+        return response;
     }
 }
 
