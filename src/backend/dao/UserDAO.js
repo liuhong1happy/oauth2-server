@@ -4,17 +4,9 @@ import UserModel from '../models/UserModel';
 import FileModel from '../models/FileModel';
 class UserDAO {
     async save(data) {
-        const user = new UserModel(data);
-        const result = new ResultModel();
-        try{
-            const response = await user.save();
-            result.Data = response;
-            result.Status = ResultModel.Success;
-        } catch(e) {
-            result.Msg = e.message;
-            result.Status = ResultModel.Error;
-        }
-        return result;
+        const user = new UserModel(data)
+        const response = await user.save();
+        return response;
     }
     async queryUserById(id) {
         const result = new ResultModel();
