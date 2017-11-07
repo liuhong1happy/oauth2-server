@@ -1,4 +1,5 @@
 import UserDAO from '../dao/UserDAO';
+import ResultModel from '../models/ResultModel';
 
 class UserService {
     constructor() {
@@ -24,7 +25,7 @@ class UserService {
             if(response === null) {
                 return new ResultModel(ResultModel.Error, '用户名密码错误')
             } else {
-                return new ResultModel(ResultModel.Error, '', response)
+                return new ResultModel(ResultModel.Success, '', response)
             }
             return result;
         } catch(e) {
